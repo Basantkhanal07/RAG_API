@@ -1,4 +1,4 @@
-# Importing Embeddings model from LangChain
+# Importing Embeddings model from LangChain_huggingface
 from langchain_huggingface import HuggingFaceEmbeddings
 
 # Initializing embeddings model
