@@ -52,7 +52,6 @@ coverage.xml
 *.pkl
 *.npz
 
-# Misc
-*.bak
+# Temporary files
 tmp/
-*.swp
+
