@@ -54,5 +54,5 @@ coverage.xml
 
 # Misc
 *.bak
-*.tmp
+tmp/
 *.swp
