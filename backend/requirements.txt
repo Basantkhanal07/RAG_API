@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+python-multipart
+pydantic-settings
+sqlalchemy
+redis
+pymupdf
+langchain
+langchain-google-genai
+pinecone
+python-dotenv
+sentence-transformers 
+langchain
+langchain_community
+langchain_HuggingFace
+langchain_pinecone
+aiofiles

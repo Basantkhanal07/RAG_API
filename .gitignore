@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+env/
+myenv/
+.env
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Database
+*.sqlite3
+*.db
+*.db-journal
+
+# Environment variables
+.env
+.env.*
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Uvicorn / FastAPI reload files
+*.pid
+*.sock
+
+# Pytest / coverage
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+.cache/
+nosetests.xml
+coverage.xml
+*.hypothesis/
+
+# Pinecone / vector DB / embeddings
+*.pkl
+*.npz
+
+# Misc
+*.bak
+*.tmp
+*.swp
