@@ -9,11 +9,15 @@ from langchain_core.documents import Document
 from langchain_pinecone import PineconeVectorStore
 from app.rag.chunking import fixed_chunking, semantic_chunking
 
+# Import DB session and repository to save documents
+from app.db.session import SessionLocal
+from app.db.repositories import save_document
+
 # Load environment variables
 load_dotenv()
 
 # Pinecone config
-PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "second")
+PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "rag-api")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT", "us-east-1")
 
@@ -29,6 +33,7 @@ async def ingest_document(file, chunking_strategy: str = "fixed"):
     3) Split into chunks
     4) Convert to Document objects with metadata
     5) Store embeddings in Pinecone
+    6) Save document info in SQLite
     """
 
     filename = getattr(file, "filename", "unknown_file")
@@ -64,7 +69,7 @@ async def ingest_document(file, chunking_strategy: str = "fixed"):
     else:
         chunks: List[str] = [text]
 
-    # Convert chunks to Document objects with metadata
+    # Convert chunks to Document objects with metadata for Pinecone
     docs: List[Document] = [
         Document(page_content=chunk, metadata={"filename": filename})
         for chunk in chunks
@@ -80,8 +85,18 @@ async def ingest_document(file, chunking_strategy: str = "fixed"):
     except Exception as e:
         return {"error": f"Failed to store embeddings in Pinecone: {str(e)}"}
 
+    # SAVE DOCUMENT TO SQLITE
+    
+    try:
+        db = SessionLocal()
+        doc_row = save_document(db, filename=filename, chunking=chunking_strategy)
+        db.close()
+    except Exception as e:
+        return {"error": f"Stored in Pinecone but failed to save in SQLite: {str(e)}"}
+
     return {
         "message": f"{len(docs)} chunks stored in Pinecone index '{PINECONE_INDEX_NAME}'",
         "chunks": len(docs),
-        "filename": filename
+        "filename": filename,
+        "document_id": doc_row.id,   # Return the saved document ID
     }

@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     # Pinecone for vector database
     PINECONE_API_KEY: str
-    PINECONE_INDEX_NAME: str = "second"
+    PINECONE_INDEX_NAME: str = "rag-api"
     PINECONE_ENVIRONMENT: str = "us-east-1"
 
     # Database settings for storing chat/booking info
