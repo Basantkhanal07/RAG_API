@@ -1,19 +1,19 @@
-fastapi==0.111.0
-uvicorn[standard]==0.30.1
-python-multipart==0.0.9
-pydantic-settings==2.6.1
-sqlalchemy==2.0.30
-redis==5.0.4
-pymupdf==1.24.5
-python-dotenv==1.0.1
-aiofiles==23.2.1
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic-settings
+sqlalchemy
+redis
+pymupdf
+python-dotenv
+aiofiles
 
-langchain==0.3.7
-langchain-community==0.3.7
-langchain-pinecone==0.2.0
-langchain-huggingface==0.1.2
+langchain
+langchain-community
+langchain-pinecone
+langchain-huggingface
 
-pinecone-client==4.1.0
-sentence-transformers==2.7.0
-transformers==4.41.2
-tokenizers==0.19.1
+pinecone-client
+sentence-transformers
+transformers
+tokenizers
