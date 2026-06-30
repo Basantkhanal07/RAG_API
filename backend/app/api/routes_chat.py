@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any
+import traceback
 
 from app.services.rag_service import chat_rag
 
@@ -35,4 +36,5 @@ async def chat_endpoint(req: ChatRequest):
         return res
     except Exception as e:
         # Catch all exceptions to prevent 500 HTML response
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Backend error: {str(e)}")

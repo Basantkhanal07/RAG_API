@@ -1,8 +1,7 @@
 import streamlit as st
 import requests
 
-# Backend API URL
-BACKEND_URL = "http://localhost:8000/api"
+from config import BACKEND_API_URL
 
 # App title and session ID
 
@@ -18,7 +17,7 @@ uploaded_file = st.file_uploader("Upload PDF or TXT", type=["pdf", "txt"])
 if st.button("Upload") and uploaded_file:
     files = {"file": uploaded_file}
     data = {"chunking": chunking}
-    res = requests.post(f"{BACKEND_URL}/ingest/upload", files=files, data=data)
+    res = requests.post(f"{BACKEND_API_URL}/ingest/upload", files=files, data=data)
     st.json(res.json())
 
 # Chat Section
@@ -27,5 +26,5 @@ query = st.text_input("Ask something")
 
 if st.button("Send") and query:
     payload = {"session_id": session_id, "message": query}
-    res = requests.post(f"{BACKEND_URL}/chat/query", json=payload)
+    res = requests.post(f"{BACKEND_API_URL}/chat/query", json=payload)
     st.json(res.json())
